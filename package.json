@@ -23,6 +23,13 @@
     "url": "https://github.com/nikezono/unific-cli/issues"
   },
   "dependencies": {
-    "commander": "~2.0.0"
+    "async": "*",
+    "underscore": "*",
+    "commander": "~2.0.0",
+    "socket.io-client": "~0.9.16",
+    "moment": "~2.1.0"
+  },
+  "devDependencies": {
+    "coffee-script": "*"
   }
 }
