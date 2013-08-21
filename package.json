@@ -1,0 +1,28 @@
+{
+  "name": "unific-cli",
+  "version": "0.0.1",
+  "description": "Command Line Interface on http://unific.net",
+  "main": "lib/app.js",
+  "scripts": {
+    "test": "cake test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nikezono/unific-cli.git"
+  },
+  "keywords": [
+    "RSS",
+    "Reader",
+    "Atom",
+    "Feed",
+    "CLI"
+  ],
+  "author": "nikezono",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nikezono/unific-cli/issues"
+  },
+  "dependencies": {
+    "commander": "~2.0.0"
+  }
+}
