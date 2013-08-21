@@ -4,17 +4,17 @@ Unific-cli
 
 Command line interface - http://unific.net
 
-![http://gyazo.com/9c7d373fe37393e927c6a7de81b0018e.png]
+![Image](http://gyazo.com/9c7d373fe37393e927c6a7de81b0018e.png)
 
 ### これはなに
 
 * [Unific](http://unific.net)のCLIインターフェースです
-* コンソールでRSSリーダが読めます
+* コンソールで動作するRSSリーダです
 
 ### Usage
 
      npm install -g unific-cli
-     unific-cli nikezono
+     unific-cli -s nikezono
 
 ### 開発計画
 
