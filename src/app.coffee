@@ -10,6 +10,10 @@ async   = require 'async'
 moment  = require 'moment'
 colors  = require 'colors'
 
+###
+#  Module Configration
+###
+
 # Color Schema
 colors.setTheme
   time: 'grey'
@@ -17,8 +21,18 @@ colors.setTheme
   prompt: 'grey'
   info: 'blue'
 
+# Random Colors
 color = ["white",'yellow', 'cyan', 'magenta', 'red', 'green', 'blue' ]
 cnumber = 0
+
+# Moment.js Setting
+moment.lang 'ja', 
+  weekdays: ["日曜日","月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"],
+  weekdaysShort: ["日","月","火","水","木","金","土"],
+
+###
+# Main Script
+###
 
 # Define Option
 program.version("0.0.1")
@@ -67,7 +81,7 @@ render = (sorted)->
     seed = parseInt(article.feed._id)+article.feed.title.length
     cnumber = seed%color.length
 
-    date = "[#{moment(article.page.pubDate).format("hh:mm")}]".time
+    date = "[#{moment(article.page.pubDate).format("HH:mm")}]".time
     title = article.page.title[color[cnumber]]
     site  = article.feed.site.underline
 
