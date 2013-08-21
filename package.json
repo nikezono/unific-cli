@@ -1,8 +1,11 @@
 {
   "name": "unific-cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Command Line Interface on http://unific.net",
   "main": "lib/app.js",
+  "bin": {
+    "unific-cli": "./bin/unific-cli"
+  },
   "scripts": {
     "test": "cake test"
   },
