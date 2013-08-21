@@ -11,13 +11,13 @@ moment  = require 'moment'
 colors  = require 'colors'
 
 # Color Schema
-colors.setTheme({
-  time: 'grey',
-  verbose: 'cyan',
-  prompt: 'grey',
-  info: 'blue',
-});
-color = ['yellow', 'cyan', 'magenta', 'red', 'green', 'blue', ]
+colors.setTheme
+  time: 'grey'
+  verbose: 'cyan'
+  prompt: 'grey'
+  info: 'blue'
+
+color = ["white",'yellow', 'cyan', 'magenta', 'red', 'green', 'blue' ]
 cnumber = 0
 
 # Define Option
@@ -26,7 +26,7 @@ program.version("0.0.1")
 .parse process.argv
 
 # Instance Variables
-updated = 0
+updated = (new Date()).getTime() - 1000*60*60 # デフォルト:一時間前
 stream  = program.stream
 
 # Start Processing
@@ -37,19 +37,20 @@ process.nextTick ->
   socket = client.connect "http://unific.net"
   socket.on 'connect', ->
 
-    console.info "Add Stream '#{stream}'. Please Wait for Sync".info
+    console.log "Add Stream '#{stream.blue}'. Please Wait for Sync"
 
     # on first sync
     socket.emit 'sync stream',
       stream:stream
-      latest:(new Date()).getTime() - 1000*60*60 # 一時間
+      latest:updated
 
     socket.on 'sync completed', (pages)->
-      sorted = _.sortBy pages, (obj)->
-        return Date.parse obj.page.pubDate
-      updated = sorted[0].page.pubDate
-      
-      sync sorted
+      if pages.length > 0
+        sorted = _.sortBy pages, (obj)->
+          return Date.parse obj.page.pubDate
+        updated = Date.parse(_.last(sorted).page.pubDate)
+
+        render sorted
 
     setInterval ->
       socket.emit 'sync stream',
@@ -57,14 +58,18 @@ process.nextTick ->
         latest:updated
     ,1000*60
 
-sync = (sorted)->
+render = (sorted)->
   async.eachSeries sorted, (article,cb)->
+
+    # フィード名から色を算出
+    # とりあえず文字数/カラー数のあまり
+    # 偏差が出るので
+    seed = parseInt(article.feed._id)+article.feed.title.length
+    cnumber = seed%color.length
 
     date = "[#{moment(article.page.pubDate).format("hh:mm")}]".time
     title = article.page.title[color[cnumber]]
     site  = article.feed.site.underline
-
-    cnumber = if cnumber is color.length-1 then 0 else cnumber+1
 
     # ゆっくり見せる
     setTimeout ->
