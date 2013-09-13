@@ -16,6 +16,11 @@ Command line interface - http://unific.net
      npm install -g unific-cli
      unific-cli -s nikezono
 
+### Options
+    -s, --stream [value]  -  select Streamname(e.g.'nikezono')
+    -u, --nourl [Bool]    -  Don't show articles url
+    -f, --feed [Bool]     -  show feedname
+
 ### 開発計画
 
 * `0.1.0` -> ニュースが降ってくる
