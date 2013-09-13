@@ -1,6 +1,6 @@
 {
   "name": "unific-cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Command Line Interface on http://unific.net",
   "main": "lib/app.js",
   "bin": {
@@ -31,7 +31,8 @@
     "commander": "~2.0.0",
     "socket.io-client": "~0.9.16",
     "moment": "~2.1.0",
-    "colors": "~0.6.1"
+    "colors": "~0.6.1",
+    "goo.gl": "0.0.2"
   },
   "devDependencies": {
     "coffee-script": "*"

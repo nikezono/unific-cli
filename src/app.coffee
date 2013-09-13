@@ -9,7 +9,7 @@ _       = require 'underscore'
 async   = require 'async'
 moment  = require 'moment'
 colors  = require 'colors'
-
+googl   = require 'goo.gl'
 ###
 #  Module Configration
 ###
@@ -79,7 +79,7 @@ process.nextTick ->
     ,1000*60
 
 render = (sorted)->
-  async.eachSeries sorted, (article,cb)->
+  async.eachSeries sorted, (article,callback)->
 
     # フィード名から色を算出
     # とりあえず文字数/カラー数のあまり
@@ -87,16 +87,24 @@ render = (sorted)->
     seed = parseInt(article.feed._id)+article.feed.title.length
     cnumber = seed%color.length
 
-    date  = "[#{moment(article.page.pubDate).format("(ddd) HH:mm")}]".time
-    title = article.page.title[color[cnumber]]
-    site  = article.feed.title
-    url   = article.page.url.underline
+    date  = "[#{moment(article.page.pubDate).format("(ddd) HH:mm")}]"
+    title = article.page.title
+    site  = article.feed.title.split(' - ')[0]
+    url   = article.page.url
 
-    # ゆっくり見せる
-    setTimeout ->
-      console.log "#{date} #{title} - #{site}:#{url}"
-      cb()
-    ,100
+    async.series [(cb)->
+      # url短縮
+      googl.shorten url,(shorter)->
+        url = shorter.id if shorter.id
+        cb()
+    ,(cb)->
+      # ゆっくり見せる
+      setTimeout ->
+        console.log "#{date.time} #{title[color[cnumber]]} - #{site}(#{url.underline})"
+        cb()
+      ,100
+    ],->
+      callback()
 
   ,->
 
