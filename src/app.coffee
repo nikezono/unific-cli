@@ -33,12 +33,17 @@ cnumber = 0
 # Define Option
 program.version("0.2.0")
 .option("-s, --stream [value]", "select Streamname(e.g.'nikezono')")
+.option("-u, --nourl [Bool]", "Don't show articles url")
+.option("-f, --feed [Bool]", "show feedname")
 .parse process.argv
 
 # Instance Variables
 updated  = (new Date()).getTime() - 1000*60*60 # デフォルト:一時間前
-stream   = program.stream
 titles   = []
+
+stream   = program.stream
+nourl    = program.nourl?
+showfeed = program.feed?
 
 # Start Processing
 process.nextTick ->
@@ -98,9 +103,13 @@ render = (sorted)->
         url = shorter.id if shorter.id
         cb()
     ,(cb)->
+      # 文章の整形
+      text = "#{date.time} #{title[color[cnumber]]}"
+      text = text + " - #{site}" if showfeed
+      text = text + " #{url.underline}" unless nourl
       # ゆっくり見せる
       setTimeout ->
-        console.log "#{date.time} #{title[color[cnumber]]} - #{site}(#{url.underline})"
+        console.log text
         cb()
       ,100
     ],->
