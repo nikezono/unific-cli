@@ -1,6 +1,6 @@
 {
   "name": "unific-cli",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Command Line Interface on http://unific.net",
   "main": "lib/app.js",
   "bin": {
