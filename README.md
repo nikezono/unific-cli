@@ -14,7 +14,19 @@ Command line interface - http://unific.net
 ### Usage
 
      npm install -g unific-cli
-     unific-cli -s nikezono
+     unific-cli -s nikezono # Example
+
+### How To Edit RSS Feeds
+
+Go [Unific.net](http://unific.net),and create your repository.
+
+##### E.g
+     http://unific.net/nikezono # nikezono's repo
+     http://unific.net/eurofootball # social reader about eurofootball
+     http://unific.net/1f39-11e3-8224 # your secret repo
+
+Any authentification is required.
+
 
 ### Options
     -s, --stream [value]  -  select Streamname(e.g.'nikezono')
